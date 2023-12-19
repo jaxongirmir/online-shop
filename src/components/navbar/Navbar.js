@@ -15,7 +15,6 @@ import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import SearchPanel from "../search-panel/SearchPanel";
 import { useSelector, useDispatch } from "react-redux";
 import { removeCart } from "../../context/cartSlice";
-import { incPendingCart } from "../../context/singleSlice";
 
 function Navbar({ data }) {
   const [search, setSearch] = useState("");
@@ -27,7 +26,6 @@ function Navbar({ data }) {
   const dispatch = useDispatch();
   const hoverClick = (el) => {
     const id = cart.find((element) => element.id === el.id);
-    dispatch(incPendingCart(el));
     navigate(`/single-page/${id.id}`);
     setHoverBar(false);
   };
@@ -56,7 +54,7 @@ function Navbar({ data }) {
           <button>
             <CiSearch />
           </button>
-          {search.trim() && <SearchPanel data={data} search={search} />}
+          {search.trim() && <SearchPanel data={data} search={search} setSearch={setSearch} />}
         </div>
         <ul className="nav__collection">
           <li className="nav__item nav__home">

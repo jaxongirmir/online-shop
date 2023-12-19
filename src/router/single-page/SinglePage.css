@@ -85,7 +85,7 @@
 .single__title_arrive span {
     font-size: 14px;
 }
-.right_page_center_counter {
+/* .right_page_center_counter {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     width: 100px;
@@ -101,7 +101,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 .bottom_page button {
     width: 100%;
     height: 40px;
@@ -113,17 +113,19 @@
 }
 .single_page_price {
   display: flex;
-  justify-content: start;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-end;
   gap: 50px;
-  padding: 0 0 50px 0;
+  padding: 50px 0;
+}
+.single_page_price .price del {
+  display: block;
+  padding: 0 0 10px;
+  font-size: 12px;
+  color: #888;
 }
 .single_page_price .price p {
   font-size: 20px;
-}
-.single_page_price .price del {
-  font-size: 14px;
-  color: #888;
 }
 
 

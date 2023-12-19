@@ -39,6 +39,7 @@
 .cart__text_counter_top .title p {
   color: #1f2026;
   max-width: 550px;
+  cursor: pointer;
 }
 .cart__text_counter_top .clear {
   display: flex;

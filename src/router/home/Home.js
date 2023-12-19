@@ -6,10 +6,12 @@ import { useSelector } from "react-redux";
 
 function Home({ data }) {
   return (
-    <div className="container">
+    <>
       <Carousel />
+    <div className="container">
       <Products data={data} />
     </div>
+    </>
 
   );
 }

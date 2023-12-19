@@ -1,10 +1,18 @@
 import "./SearchPanel.css";
 import nothingFIndImg from '../../assets/search__nothing.png'
+import {useNavigate} from 'react-router-dom'
+import { useDispatch } from "react-redux";
 
-export default function SearchPanel({ data, search }) {
+export default function SearchPanel({ data, search, setSearch }) {
+  const dispatch = useDispatch()
+  const home = (el) => {
+    navigate(`single-page/${el.id}`)
+    setSearch('')
+  }
   const filteredProducts = data.filter((el) => {
     return el.title.toLowerCase().includes(search.toLowerCase());
   });
+  const navigate = useNavigate()
   return (
     <div className="serach__panel">
       <div className="filtered__products">
@@ -15,7 +23,7 @@ export default function SearchPanel({ data, search }) {
           </div>
         ) : (
           filteredProducts.slice(0, 3)?.map((filPro) => (
-            <div key={filPro.id} className="filtered__item">
+            <div key={filPro.id} onClick={() => home(filPro)} className="filtered__item">
               <img src={filPro.url} />
               <div className="texts__filteredProducts">
                 <p>{filPro.title}</p>

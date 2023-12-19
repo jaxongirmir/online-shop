@@ -7,35 +7,28 @@ import { incCart, decCart } from "../../context/cartSlice";
 import { toggleWishes } from "../../context/wishesSlice";
 import NotFind from "../not-find/NotFind";
 import Products from "../../components/products/Products";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { decPendingCart, incPendingCart } from "../../context/singleSlice";
+import {  toast } from "react-toastify";
 
 export default function SinglePage({ data }) {
   const dispatch = useDispatch();
   const params = useParams();
   const product = data.find((el) => el.id === params.id);
   const wishes = useSelector((s) => s.wishes.value);
-  const cat = useSelector((s) => s.pendingCart.value);
-  const cart = cat.find(el => el.id === params.id)
+  // const cat = useSelector((s) => s.pendingCart.value);
+  // const cart = cat.find(el => el.id === params.id)
   const navigate = useNavigate()
   const wishesClick = (product) => {
     dispatch(toggleWishes(product));
   };
   const adToCard = (prod) => {
     notify();
+    dispatch(incCart(prod))
     navigate('/cart')
   };
   const notify = () =>
     toast.success("Sizning maxsulotingiz savatga qoshildi", {
       position: "top-center",
       autoClose: 2500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
     });
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -78,17 +71,11 @@ export default function SinglePage({ data }) {
             <hr />
           </div>
           <div className="right_page_center">
-            <h4>Miqdori</h4>
-            <div className="right_page_center_counter">
-              <button disabled={cart.quantity <= 1 ? true : false} onClick={() => dispatch(decPendingCart(product))}>-</button>
-              <span>{cart.quantity}</span>
-              <button onClick={() => dispatch(incPendingCart(product))}>+</button>
-            </div>
             <div className="single_page_price">
               <h4>Narxi:</h4>
               <div className="price">
-                <p>{(product.price * cart.quantity).brm()} so'm</p>
                 <del>{(product.price * 1.2).brm()} so'm</del>
+                <p>{(product.price ).brm()} so'm</p>
               </div>
             </div>
           </div>
@@ -102,18 +89,6 @@ export default function SinglePage({ data }) {
         </div>
       </div>
       <Products data={data.slice(0, 5)} />
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </div>
   );
 }

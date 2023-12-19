@@ -8,10 +8,9 @@ import {
   clearCart,
 } from "../../context/cartSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate} from 'react-router-dom'
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const BOT_TOKEN = "6697346469:AAF_WLrIJYyCt_KgAC7lP-YSeSJa_oZVsNI";
 const CHAT_ID = "-1001999937730";
@@ -19,10 +18,7 @@ const CHAT_ID = "-1001999937730";
 
 export default function CartProduct({ data, staticData }) {
   const dispatch = useDispatch();
-  const totalSum = data.reduce(
-    (acc, product) => acc + product.price * product.quantity,
-    0
-  );
+  const totalSum = data.reduce((acc, product) => acc + product.price * product.quantity, 0);
   const navigate = useNavigate();
   const totalProduct = data.reduce((acc, product) => acc + product.quantity, 0);
   const [fullName, setFullName] = useState("");
@@ -31,10 +27,6 @@ export default function CartProduct({ data, staticData }) {
   const [message, setMessage] = useState("");
   const handleClick = (e) => {
     e.preventDefault();
-
-    // let api = new XMLHttpRequest();
-    // api.open("GET", url, true);
-    // api.send();
     let order = "<b>Buyurtma:</b> %0A";
     order += `<b>Ism va Familiya:</b> ${fullName} %0A`;
     order += `<b>Telefon nomer:</b> ${phoneNumber} %0A`;
@@ -59,12 +51,6 @@ export default function CartProduct({ data, staticData }) {
         toast.error("Nimadir xato ketdi", {
           position: "top-center",
           autoClose: 2500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
         })
       );
   };
@@ -76,10 +62,12 @@ export default function CartProduct({ data, staticData }) {
           <div className="cart__products">
             {data?.map((el) => (
               <div key={el.id} className="cart__item">
-                <img src={el.url} />
+                <img src={el.url} onClick={() => {
+                  navigate(`/single-page/${el.id}`)
+                }}/>
                 <div className="cart__text_counter">
                   <div className="cart__text_counter_top">
-                    <div className="title">
+                    <div  className="title" onClick={() => navigate(`/single-page/${el.id}`) }>
                       <p>{el.title}</p>
                     </div>
                     <div
@@ -155,18 +143,6 @@ export default function CartProduct({ data, staticData }) {
         </div>
       </div>
       <div className="products_before_cart"></div>
-      <ToastContainer
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
     </>
   );
 }
