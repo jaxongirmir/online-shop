@@ -29,7 +29,7 @@ function Navbar({ data }) {
     navigate(`/single-page/${id.id}`);
     setHoverBar(false);
   };
-  if (pathname.includes("/login")) {
+  if (pathname.includes("login") || pathname.includes('admin')) {
     return <></>;
   }
   return (
@@ -44,7 +44,7 @@ function Navbar({ data }) {
             <span>Katalog</span>
           </button>
         </div>
-        <div className="nav__search">
+        <div className="nav__search" onBlur={() => setSearch('')}>
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -70,7 +70,7 @@ function Navbar({ data }) {
             </Link>
           </li>
           <li className="nav__item">
-            <NavLink to={"/login"}>
+            <NavLink to={"/admin"}>
               <CiUser />
               <span>Kirish</span>
             </NavLink>

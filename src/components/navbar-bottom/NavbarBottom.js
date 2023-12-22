@@ -16,7 +16,7 @@ const DATA = [
 ]
 function NavbarBottom() {
   let { pathname } = useLocation();
-  if (pathname.includes("/login")) {
+  if (pathname.includes("login") || pathname.includes('admin')) {
     return <></>;
   }
   return (

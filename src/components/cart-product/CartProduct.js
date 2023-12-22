@@ -29,7 +29,7 @@ export default function CartProduct({ data, staticData }) {
     e.preventDefault();
     let order = "<b>Buyurtma:</b> %0A";
     order += `<b>Ism va Familiya:</b> ${fullName} %0A`;
-    order += `<b>Telefon nomer:</b> ${phoneNumber} %0A`;
+    order += `<b>Telefon nomer:</b> %2B998${phoneNumber} %0A`;
     order += `<b>Manzil:</b> ${address} %0A`;
     order += `<b>Xabar</b>: ${message || "yoq"} %0A%0A`;
     data.forEach((el, act) => {

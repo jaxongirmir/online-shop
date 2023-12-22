@@ -3,7 +3,7 @@ import "./SinglePage.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { incCart, decCart } from "../../context/cartSlice";
+import { incCart } from "../../context/cartSlice";
 import { toggleWishes } from "../../context/wishesSlice";
 import NotFind from "../not-find/NotFind";
 import Products from "../../components/products/Products";
@@ -39,7 +39,9 @@ export default function SinglePage({ data }) {
   return (
     <div className="container">
       <div className="single__page">
-        <img src={product.url} />
+        <div className="single__page_left">
+        <img src={product.url} alt="img" />
+        </div>
         <div className="right_page">
           <div className="top_page">
             <span>5.0 ( 6 baho ) 200 ta buyurtma</span>

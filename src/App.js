@@ -9,6 +9,8 @@ import NavbarBottom from "./components/navbar-bottom/NavbarBottom";
 import SinglePage from "./router/single-page/SinglePage";
 import NotFind from "./router/not-find/NotFind";
 import { Routes, Route } from "react-router-dom";
+import Admin from "./router/admin/Admin";
+import Auth from "./router/auth/Auth";
 import { PRODUCTS } from "./static";
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,7 +27,11 @@ function App() {
         <Route path="/wishes" element={<Wishes data={PRODUCTS} />} />
         <Route path="/cart" element={<Cart data={PRODUCTS}/>} />
         <Route path="*" element={<NotFind/>}/>
+        <Route path="/" element={<Auth/>}>
+          <Route path="/admin" element={<Admin/>} />
+        </Route>
         <Route path="single-page/:id" element={<SinglePage data={PRODUCTS}/>}/>
+        <Route path="/admin/*" element={<Admin/>}/>
       </Routes>
       <Footer />
       <ToastContainer/>

@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 function SubHeader() {
   let { pathname } = useLocation();
-  if (pathname.includes("/login")) {
+  if (pathname.includes("login") || pathname.includes('admin')) {
     return <></>;
   }
   return (
